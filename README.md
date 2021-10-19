@@ -52,14 +52,14 @@ result=lineage(data = data, repeats = 30, thread = 20)
 ```
 
 #### 4.2 mode2: run non-parallel iterative optimization
-```{r mode2, eval=FALSE}
+```{r mode2}
 data("TF1_clones")
 data=TF1_clones$data
 result=lineage(data = data, repeats = 30, thread = NULL)
 ```
 
 #### 4.3 trace the lineage tree
-```{r lineage_tree, eval=FALSE}
+```{r lineage_tree}
 data("TF1_clones")
 data=TF1_clones$data
 result=lineage(data = data, repeats = 30, thread = 20)
@@ -71,17 +71,20 @@ str(hc, max.level = 1)
 ```
 
 #### 4.4 visualization of the result
-```{r plots, eval=FALSE}
+```{r plots}
 data("TF1_clones")
 data=TF1_clones$data
 label=TF1_clones$rlabel    #reference clone labels
 result=lineage(data = data, repeats = 30, thread = 20)
 
-plots=traceplot(result, label)  #plots with reference clone labels
+plots0=traceplot(result, label)  #plots with reference clone labels
 plots=traceplot(result, result$label)  #plots with inferred clone labels
-
+```
+```{r plots_output, eval=FALSE}
 # 2d visualization cluster results with clonal labels
-# colored in reference clone labels or inferred labels
+# colored in reference clone labels 
+print(plots0$d2d)
+# or inferred labels
 print(plots$d2d)
 # Heatmap results with markers information across cells and color bar is
 # colored in reference clone labels
@@ -91,7 +94,7 @@ print(plots$heatmap)
 #### 4.5 results
 ```{r result, eval=FALSE}
 # The recommended result is embedded in the returned result as result$best.
-best=list(result=all_results$best, plots=plots)
+best=list(result=result$best, plots=plots)
 ```
 
 ## 5 Suggestions
