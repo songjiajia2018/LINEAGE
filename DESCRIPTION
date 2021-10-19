@@ -1,0 +1,18 @@
+Package: LINEAGE
+Type: Package
+Title: Label-Free Identification of Endogenous Informative Single Cell Mitochondrial RNA Mutation for Lineage Analysis and Clonal Evolution
+Version: 0.99.1
+Author: Jia Song
+Maintainer: Jia Song <550238460@qq.com>
+Description: The whole genome RNA SNP is used as endogenous markers for lineage study.
+    This package identifies clonal features based on single cell RNA sequencing data solely by integrating mutation type and subspace-subspace cross entropy into consideration.
+Depends: R (>= 3.6.0)
+Imports: ADPclust, ggplot2, grDevices, mclust, parallel, pheatmap, pROC, Rtsne, stats, umap
+Suggests: knitr, rmarkdown
+License: GPL-3
+Encoding: UTF-8
+LazyData: false
+RoxygenNote: 7.1.2
+VignetteBuilder: knitr
+biocViews: SingleCell, RNASeq, Sequencing, TranscriptomeVariant
+NeedsCompilation: no
