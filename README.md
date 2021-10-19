@@ -1,5 +1,4 @@
 # LINEAGE
-LINEAGE
 
 Lineage analysis based on scRNA-seq could provide key insights into the fate of individual cells and inform therapeutic intervention for diseases. However, such analysis is limited by several technical challenges. On top of considerable computational resources, these analyses also require specific types of matching data. Therefore, a computational algorithm for label-free lineage analysis based on endogenous markers is desired.
 
