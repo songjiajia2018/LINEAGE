@@ -13,6 +13,7 @@ We have provided an example data and its validated cell lineage information in �
 There are 3 options to install LINEAGE. 
 
 **• Option 1: install from Bioconductor**
+
 ```{r option1, eval=FALSE}
 if(!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
@@ -20,12 +21,14 @@ BiocManager::install("LINEAGE")
 ```
 
 **• Option 2: using the devtools package to install directly from GitHub**
+
 ```{r option2, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("songjiajia2018/LINEAGE")
 ```
 
 **• Option 3: Download the source code from github, and install as follow**
+
 The source code package is provided in the *source_pkg* directory.
 ```{r option3, eval=FALSE}
 install.packages("the_directory_that_contain_the_package/LINEAGE_0.99.1.tar.gz",repos=NULL,type="source")
