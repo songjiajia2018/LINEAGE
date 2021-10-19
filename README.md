@@ -92,8 +92,6 @@ print(plots$heatmap)
 ```{r result, eval=FALSE}
 # The recommended result is embedded in the returned result as result$best.
 best=list(result=all_results$best, plots=plots)
-str(best, max.level=1)
-str(best$result, max.level=1)
 ```
 
 ## 5 Suggestions
