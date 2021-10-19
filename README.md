@@ -6,7 +6,7 @@ Lineage analysis based on scRNA-seq could provide key insights into the fate of 
 
 We chose mitochondrial RNA variant as endogenous makers for lineage analysis in consideration of relatively small mitochondrial genome, mitochondrial genome polymorphism and heritable mitochondrial variation. In order to select the clonal feature without pre-existing knowledge, we defined “cross entropy” as the cell distribution similarity among subspaces. These subspaces are obtained by hierarchical clustering according to the variant frequency dynamic patterns. Then we designed a lineage analysis algorithm called Label-free IdeNtification of Endogenous informAtive sinGle cell mitochondrial RNA mutation for lineage analysis and clonal Evolution (LINEAGE) by integrating the low cross-entropy subspaces identification with a consensus clustering method.
 
-We have provided an example data and its validated cell lineage information in “TF1_clones.rda” at <https://github.com/songjiajia2018/LINEAGE/data>, which might be helpful for users to go through this manual.
+We have provided an example data and its validated cell lineage information in “TF1_clones.rda” at *data* directory, which might be helpful for users to go through this manual.
 
 ## 2 Install
 
@@ -26,8 +26,8 @@ devtools::install_github("songjiajia2018/LINEAGE")
 ```
 
 **• Option 3: Download the source code from github, and install as follow**
+The source code package is provided in the *source_pkg* directory.
 ```{r option3, eval=FALSE}
-wget -c 
 install.packages("the_directory_that_contain_the_package/LINEAGE_0.99.1.tar.gz",repos=NULL,type="source")
 ```
 
