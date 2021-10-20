@@ -11,7 +11,7 @@ We have provided an example data and its validated cell lineage information in â
 ## 2 Install
 
 LINEAGE can be successfully installed on MacOS*, Windows, CentOS, but not on Ubuntu Linux*.
-*: checked by R-hub builder (https://builder.r-hub.io/).
+    *: checked by R-hub builder (https://builder.r-hub.io/).
 
 There are 2 options to install LINEAGE. 
 
