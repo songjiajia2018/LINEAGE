@@ -54,12 +54,13 @@ The total number of reads aligned to per allele on each site of mitochondrial ge
 python ppl/ppl2_run.py -p -m -r --name {NAME} --input {FILELIST} --input-filelist
 ```
 (i) Input is a single file: The input should be a sorted bam file. Users can specify prefixes of outputs with the option "--outprefix".
+
 (ii) Input is a file list: The input should be a csv table with the sorted bam files and their out prefixes. Here is an example:
       SRR3562459_2.bam,SRR3562459
       SRR3562814_2.bam,SRR3562814
       SRR3563095_2.bam,SRR3563095
       SRR3563458_2.bam,SRR3563458
-  The output is five mutation files for each input:
+    The output is five mutation files for each input:
       SRR3562459.A.txt SRR3562459.coverage.txt SRR3562459.C.txt SRR3562459.G.txt SRR3562459.T.txt
       SRR3562814.A.txt SRR3562814.coverage.txt SRR3562814.C.txt SRR3562814.G.txt SRR3562814.T.txt
       SRR3563095.A.txt SRR3563095.coverage.txt SRR3563095.C.txt SRR3563095.G.txt SRR3563095.T.txt
