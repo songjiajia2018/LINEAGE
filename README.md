@@ -41,7 +41,7 @@ An example data is available in the source codes.
 We have provided an example data **“TF1_clones.rda”** containing a mitochondrial genotype matrix of TF1_clones and its validated cell lineage information in the *data* dictionary of LINEAGE package, which can be used for test. It should be noted that **the result has a certain randomness** because of the randomness from clustering and dimension reduction processes.
 
 #### 4.0 preprocessing: generate mitochondrial genotype matrixes
-After alignment, A new bam file consisting of MtDNA records, which were extracted from the alignment result with SAMtools(36), was obtained. 
+After alignment, new bam files consisting of MtDNA records, which were extracted from the alignment result with SAMtools, were obtained. 
 ```{r mtbam, eval=FALSE}
 STAR --runThreadN {RUNNING_THREADS_NUMBER} --genomeDir {GENOME_PATH} --outFileNamePrefix {PREFIX} --sjdbGTFfile {GTF} --outSAMunmapped Within --readFilesIn {FASTQ1} {FASTQ2}
 samtools view -bS {STAR_OUT_SAM} > {OUT_BAM}
@@ -49,16 +49,25 @@ samtools sort {INPUT_BAM} -o {OUT_SORTED_BAM}
 samtools view -h {INPUT_SORTED_BAM} {REGION: MT, chrM, et al.} > {FINAL_SAM}
 samtools view -bS {FINAL_SAM} >{FINAL_BAM}
 ```
-The total number of reads aligned to per allele on each site of mitochondrial genome were counted using *https://github.com/songjiajia2018/ppl*. The variant frequency (AFx,b) was defined as:  
-〖AF〗_(x,b)=R_b/(∑_(b∈{A,G,C,T})▒R_b )
-
+The total number of reads aligned to per allele on each site of mitochondrial genome were counted using *https://github.com/songjiajia2018/ppl*. 
 ```{r mtmatrix, eval=FALSE}
-STAR --runThreadN {RUNNING_THREADS_NUMBER} --genomeDir {GENOME_PATH} --outFileNamePrefix {PREFIX} --sjdbGTFfile {GTF} --outSAMunmapped Within --readFilesIn {FASTQ1} {FASTQ2}
-samtools view -bS {STAR_OUT_SAM} > {OUT_BAM}
-samtools sort {INPUT_BAM} -o {OUT_SORTED_BAM}
-samtools view -h {INPUT_SORTED_BAM} {REGION: MT, chrM, et al.} > {FINAL_SAM}
-samtools view -bS {FINAL_SAM} >{FINAL_BAM}
+python ppl/ppl2_run.py -p -m -r --name {NAME} --input {FILELIST} --input-filelist
 ```
+(i) Input is a single file: The input should be a sorted bam file. Users can specify prefixes of outputs with the option "--outprefix".
+(ii) Input is a file list: The input should be a csv table with the sorted bam files and their out prefixes. Here is an example:
+      SRR3562459_2.bam,SRR3562459
+      SRR3562814_2.bam,SRR3562814
+      SRR3563095_2.bam,SRR3563095
+      SRR3563458_2.bam,SRR3563458
+  The output is five mutation files for each input:
+      SRR3562459.A.txt SRR3562459.coverage.txt SRR3562459.C.txt SRR3562459.G.txt SRR3562459.T.txt
+      SRR3562814.A.txt SRR3562814.coverage.txt SRR3562814.C.txt SRR3562814.G.txt SRR3562814.T.txt
+      SRR3563095.A.txt SRR3563095.coverage.txt SRR3563095.C.txt SRR3563095.G.txt SRR3563095.T.txt
+      SRR3563458.A.txt SRR3563458.coverage.txt SRR3563458.C.txt SRR3563458.G.txt SRR3563458.T.txt
+(iii) Related options:
+  --qalign: specify minimum alignment quality required to be considered (default: 30)
+  --maxBP: specify maximum length of mtDNA genome (default: 16569, for mt.fa)
+  --reference: specify the mtDNA reference (default:./ppl/mito_reference/mt.fa)
 Mitochondrial genotype matrix, where a column represented a single cell and a row represented variants frequency of a specific mitochondrial genotype, was thus generated.
 
 #### 4.1 mode1: run parallel iterative optimization
