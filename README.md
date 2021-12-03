@@ -41,7 +41,7 @@ An example data is available in the source codes.
 We have provided an example data **“TF1_clones.rda”** containing a mitochondrial genotype matrix of TF1_clones and its validated cell lineage information in the *data* dictionary of LINEAGE package, which can be used for test. It should be noted that **the result has a certain randomness** because of the randomness from clustering and dimension reduction processes.
 
 #### 4.0 preprocessing: generate mitochondrial genotype matrixes
-After alignment, new bam files consisting of MtDNA records, which were extracted from the alignment result with SAMtools, were obtained. 
+4.0.1 After alignment, new bam files consisting of MtDNA records, which were extracted from the alignment result with SAMtools, were obtained. 
 ```{r mtbam, eval=FALSE}
 STAR --runThreadN {RUNNING_THREADS_NUMBER} --genomeDir {GENOME_PATH} --outFileNamePrefix {PREFIX} --sjdbGTFfile {GTF} --outSAMunmapped Within --readFilesIn {FASTQ1} {FASTQ2}
 samtools view -bS {STAR_OUT_SAM} > {OUT_BAM}
@@ -49,7 +49,7 @@ samtools sort {INPUT_BAM} -o {OUT_SORTED_BAM}
 samtools view -h {INPUT_SORTED_BAM} {REGION: MT, chrM, et al.} > {FINAL_SAM}
 samtools view -bS {FINAL_SAM} >{FINAL_BAM}
 ```
-The total number of reads aligned to per allele on each site of mitochondrial genome were counted using *https://github.com/songjiajia2018/ppl*. 
+4.0.2 The total number of reads aligned to per allele on each site of mitochondrial genome were counted using *https://github.com/songjiajia2018/ppl*. The final output is a rds file containing mitochondrial varients frequency.
 ```{r mtmatrix, eval=FALSE}
 python ppl/ppl2_run.py -p -m -r --input {FILELIST} --input-filelist
 ```
@@ -60,14 +60,7 @@ SRR3562814_2.bam,SRR3562814
 SRR3563095_2.bam,SRR3563095
 SRR3563458_2.bam,SRR3563458
 ```
-The output is five mutation files for each input:
-```{r output, eval=FALSE}
-SRR3562459.A.txt SRR3562459.coverage.txt SRR3562459.C.txt SRR3562459.G.txt SRR3562459.T.txt
-SRR3562814.A.txt SRR3562814.coverage.txt SRR3562814.C.txt SRR3562814.G.txt SRR3562814.T.txt
-SRR3563095.A.txt SRR3563095.coverage.txt SRR3563095.C.txt SRR3563095.G.txt SRR3563095.T.txt
-SRR3563458.A.txt SRR3563458.coverage.txt SRR3563458.C.txt SRR3563458.G.txt SRR3563458.T.txt
-```
-(ii) Related options:
+(ii) Parameters:
 ```{r options, eval=FALSE}
 -p: calling variations from bam files and generating five txt files with 'A', 'T', 'C', 'G', 'coverage' suffixes, respectively
 -m: merging all the 'A', 'T', 'C', 'G', 'coverage' txt files in a directory to five files with ".gz" format for the following rds generation
@@ -77,7 +70,10 @@ SRR3563458.A.txt SRR3563458.coverage.txt SRR3563458.C.txt SRR3563458.G.txt SRR35
 --maxBP: specify maximum length of mtDNA genome (default: 16569, for mt.fa)
 --reference: specify the mtDNA reference (default:./ppl/mito_reference/mt.fa)
 ```
-Mitochondrial genotype matrix, where a column represented a single cell and a row represented variants frequency of a specific mitochondrial genotype, was thus generated.
+4.0.3 Extract mitochondrial genotype matrix, where a column represented a single cell and a row represented variants frequency of a specific mitochondrial genotype, from a rds file using *https://github.com/songjiajia2018/ppl/mtMatrix.R*
+```{r mtmatrix, eval=FALSE}
+Rscript mtMatrix.R {RDS FILE}
+```
 
 #### 4.1 mode1: run parallel iterative optimization
 ```{r mode1, eval=FALSE}
