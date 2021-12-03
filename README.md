@@ -60,7 +60,7 @@ SRR3562814_2.bam,SRR3562814
 SRR3563095_2.bam,SRR3563095
 SRR3563458_2.bam,SRR3563458
 ```
-The output from each bam contains five mutation files for each input:
+The output contains five mutation files for each bam file:
 ```{r output, eval=FALSE}
 SRR3562459.A.txt SRR3562459.coverage.txt SRR3562459.C.txt SRR3562459.G.txt SRR3562459.T.txt
 SRR3562814.A.txt SRR3562814.coverage.txt SRR3562814.C.txt SRR3562814.G.txt SRR3562814.T.txt
