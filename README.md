@@ -53,12 +53,19 @@ samtools view -bS {FINAL_SAM} >{FINAL_BAM}
 ```{r mtmatrix, eval=FALSE}
 python ppl/ppl2_run.py -p -m -r --input {FILELIST} --input-filelist
 ```
-(i) Input is a file list: The input should be a csv table with the sorted bam files and their out prefixes. Here is an example:
+(i) Input is a file list: The input should be a csv table with the sorted bam files and their output prefixes. Here is an example:
 ```{r input, eval=FALSE}
 SRR3562459_2.bam,SRR3562459
 SRR3562814_2.bam,SRR3562814
 SRR3563095_2.bam,SRR3563095
 SRR3563458_2.bam,SRR3563458
+```
+The output from each bam contains five mutation files for each input:
+```{r output, eval=FALSE}
+SRR3562459.A.txt SRR3562459.coverage.txt SRR3562459.C.txt SRR3562459.G.txt SRR3562459.T.txt
+SRR3562814.A.txt SRR3562814.coverage.txt SRR3562814.C.txt SRR3562814.G.txt SRR3562814.T.txt
+SRR3563095.A.txt SRR3563095.coverage.txt SRR3563095.C.txt SRR3563095.G.txt SRR3563095.T.txt
+SRR3563458.A.txt SRR3563458.coverage.txt SRR3563458.C.txt SRR3563458.G.txt SRR3563458.T.txt
 ```
 (ii) Parameters:
 ```{r options, eval=FALSE}
