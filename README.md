@@ -40,6 +40,20 @@ An example data is available in the source codes.
 
 We have provided an example data **“TF1_clones.rda”** containing a mitochondrial genotype matrix of TF1_clones and its validated cell lineage information in the *data* dictionary of LINEAGE package, which can be used for test. It should be noted that **the result has a certain randomness** because of the randomness from clustering and dimension reduction processes.
 
+#### 4.0 preprocessing: generate mitochondrial genotype matrixes
+After alignment, A new bam file consisting of MtDNA records, which were extracted from the alignment result with SAMtools(36), was obtained. 
+```{r mtbam, eval=FALSE}
+STAR --runThreadN {RUNNING_THREADS_NUMBER} --genomeDir {GENOME_PATH}
+--outFileNamePrefix {PREFIX} --sjdbGTFfile {GTF} --outSAMunmapped Within --
+readFilesIn {FASTQ1} {FASTQ2}
+samtools view -bS {STAR_OUT_SAM} > {OUT_BAM}
+samtools sort {INPUT_BAM} -o {OUT_SORTED_BAM}
+samtools view -h {INPUT_SORTED_BAM} {REGION: MT, chrM, et al.} > {FINAL_SAM}
+samtools view -bS {FINAL_SAM} >{FINAL_BAM}
+```
+The total number of reads aligned to per allele on each site of mitochondrial genome were counted using a Python script.
+
+
 #### 4.1 mode1: run parallel iterative optimization
 ```{r mode1, eval=FALSE}
 data("TF1_clones")
