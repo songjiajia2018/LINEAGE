@@ -43,16 +43,23 @@ We have provided an example data **“TF1_clones.rda”** containing a mitochond
 #### 4.0 preprocessing: generate mitochondrial genotype matrixes
 After alignment, A new bam file consisting of MtDNA records, which were extracted from the alignment result with SAMtools(36), was obtained. 
 ```{r mtbam, eval=FALSE}
-STAR --runThreadN {RUNNING_THREADS_NUMBER} --genomeDir {GENOME_PATH}
---outFileNamePrefix {PREFIX} --sjdbGTFfile {GTF} --outSAMunmapped Within --
-readFilesIn {FASTQ1} {FASTQ2}
+STAR --runThreadN {RUNNING_THREADS_NUMBER} --genomeDir {GENOME_PATH} --outFileNamePrefix {PREFIX} --sjdbGTFfile {GTF} --outSAMunmapped Within --readFilesIn {FASTQ1} {FASTQ2}
 samtools view -bS {STAR_OUT_SAM} > {OUT_BAM}
 samtools sort {INPUT_BAM} -o {OUT_SORTED_BAM}
 samtools view -h {INPUT_SORTED_BAM} {REGION: MT, chrM, et al.} > {FINAL_SAM}
 samtools view -bS {FINAL_SAM} >{FINAL_BAM}
 ```
-The total number of reads aligned to per allele on each site of mitochondrial genome were counted using a Python script.
+The total number of reads aligned to per allele on each site of mitochondrial genome were counted using *https://github.com/songjiajia2018/ppl*. The variant frequency (AFx,b) was defined as:  
+〖AF〗_(x,b)=R_b/(∑_(b∈{A,G,C,T})▒R_b )
 
+```{r mtmatrix, eval=FALSE}
+STAR --runThreadN {RUNNING_THREADS_NUMBER} --genomeDir {GENOME_PATH} --outFileNamePrefix {PREFIX} --sjdbGTFfile {GTF} --outSAMunmapped Within --readFilesIn {FASTQ1} {FASTQ2}
+samtools view -bS {STAR_OUT_SAM} > {OUT_BAM}
+samtools sort {INPUT_BAM} -o {OUT_SORTED_BAM}
+samtools view -h {INPUT_SORTED_BAM} {REGION: MT, chrM, et al.} > {FINAL_SAM}
+samtools view -bS {FINAL_SAM} >{FINAL_BAM}
+```
+Mitochondrial genotype matrix, where a column represented a single cell and a row represented variants frequency of a specific mitochondrial genotype, was thus generated.
 
 #### 4.1 mode1: run parallel iterative optimization
 ```{r mode1, eval=FALSE}
