@@ -79,7 +79,7 @@ SRR3563458.A.txt SRR3563458.coverage.txt SRR3563458.C.txt SRR3563458.G.txt SRR35
 ```
 4.0.3 Extract mitochondrial genotype matrix (mtMatrix.txt), where a column represented a single cell and a row represented variants frequency of a specific mitochondrial genotype, from a rds file using *https://github.com/songjiajia2018/ppl/mtMatrix.R*
 ```{r mtmatrix, eval=FALSE}
-Rscript mtMatrix.R {RDS FILE}
+Rscript mtMatrix.R {RDS_FILE}
 ```
 
 #### 4.1 mode1: run parallel iterative optimization
