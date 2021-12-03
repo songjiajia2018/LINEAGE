@@ -51,24 +51,32 @@ samtools view -bS {FINAL_SAM} >{FINAL_BAM}
 ```
 The total number of reads aligned to per allele on each site of mitochondrial genome were counted using *https://github.com/songjiajia2018/ppl*. 
 ```{r mtmatrix, eval=FALSE}
-python ppl/ppl2_run.py -p -m -r --name {NAME} --input {FILELIST} --input-filelist
+python ppl/ppl2_run.py -p -m -r --input {FILELIST} --input-filelist
 ```
-(i) Input is a single file: The input should be a sorted bam file. Users can specify prefixes of outputs with the option "--outprefix".
-
-(ii) Input is a file list: The input should be a csv table with the sorted bam files and their out prefixes. Here is an example:
-      SRR3562459_2.bam,SRR3562459
-      SRR3562814_2.bam,SRR3562814
-      SRR3563095_2.bam,SRR3563095
-      SRR3563458_2.bam,SRR3563458
-    The output is five mutation files for each input:
-      SRR3562459.A.txt SRR3562459.coverage.txt SRR3562459.C.txt SRR3562459.G.txt SRR3562459.T.txt
-      SRR3562814.A.txt SRR3562814.coverage.txt SRR3562814.C.txt SRR3562814.G.txt SRR3562814.T.txt
-      SRR3563095.A.txt SRR3563095.coverage.txt SRR3563095.C.txt SRR3563095.G.txt SRR3563095.T.txt
-      SRR3563458.A.txt SRR3563458.coverage.txt SRR3563458.C.txt SRR3563458.G.txt SRR3563458.T.txt
-(iii) Related options:
-  --qalign: specify minimum alignment quality required to be considered (default: 30)
-  --maxBP: specify maximum length of mtDNA genome (default: 16569, for mt.fa)
-  --reference: specify the mtDNA reference (default:./ppl/mito_reference/mt.fa)
+(i) Input is a file list: The input should be a csv table with the sorted bam files and their out prefixes. Here is an example:
+```{r input, eval=FALSE}
+SRR3562459_2.bam,SRR3562459
+SRR3562814_2.bam,SRR3562814
+SRR3563095_2.bam,SRR3563095
+SRR3563458_2.bam,SRR3563458
+```
+The output is five mutation files for each input:
+```{r output, eval=FALSE}
+SRR3562459.A.txt SRR3562459.coverage.txt SRR3562459.C.txt SRR3562459.G.txt SRR3562459.T.txt
+SRR3562814.A.txt SRR3562814.coverage.txt SRR3562814.C.txt SRR3562814.G.txt SRR3562814.T.txt
+SRR3563095.A.txt SRR3563095.coverage.txt SRR3563095.C.txt SRR3563095.G.txt SRR3563095.T.txt
+SRR3563458.A.txt SRR3563458.coverage.txt SRR3563458.C.txt SRR3563458.G.txt SRR3563458.T.txt
+```
+(ii) Related options:
+```{r options, eval=FALSE}
+-p: calling variations from bam files and generating five txt files with 'A', 'T', 'C', 'G', 'coverage' suffixes, respectively
+-m: merging all the 'A', 'T', 'C', 'G', 'coverage' txt files in a directory to five files with ".gz" format for the following rds generation
+-r: generating rds file for downstream analysis from a directory containing merged 'A', 'T', 'C', 'G', 'coverage' txt files
+--name: The program will create a directory named by the argument. Sample processing and downstream analysis will be performed under the directory. (default: PROJECT_MITO)
+--qalign: specify minimum alignment quality required to be considered (default: 30)
+--maxBP: specify maximum length of mtDNA genome (default: 16569, for mt.fa)
+--reference: specify the mtDNA reference (default:./ppl/mito_reference/mt.fa)
+```
 Mitochondrial genotype matrix, where a column represented a single cell and a row represented variants frequency of a specific mitochondrial genotype, was thus generated.
 
 #### 4.1 mode1: run parallel iterative optimization
