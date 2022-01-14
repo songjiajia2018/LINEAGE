@@ -2,7 +2,7 @@
 # to github, we provided allele frequency matrixes of two cell lines with 
 # "451Lu_af_var.txt" and "A357_af_var.txt". You will get "melanoma_2_cell_lines_af.txt", 
 # which can be used as input of LINEAGE, by putting two matrix files and this 
-# R script in the same directory and then run command “Rscipt af.R”.
+# R script in the same directory and then running command “Rscipt af.R”.
 
 library(tidyr)
 
