@@ -46,6 +46,7 @@ We have provided an example data **“TF1_clones.rda”** containing a mitochond
 STAR --runThreadN {RUNNING_THREADS_NUMBER} --genomeDir {GENOME_PATH} --outFileNamePrefix {PREFIX} --sjdbGTFfile {GTF} --outSAMunmapped Within --readFilesIn {FASTQ1} {FASTQ2}
 samtools view -bS {STAR_OUT_SAM} > {OUT_BAM}
 samtools sort {INPUT_BAM} -o {OUT_SORTED_BAM}
+samtools index {OUT_SORTED_BAM}
 samtools view -h {INPUT_SORTED_BAM} {REGION: MT, chrM, et al.} > {FINAL_SAM}
 samtools view -bS {FINAL_SAM} >{FINAL_BAM}
 ```
