@@ -139,3 +139,7 @@ best=list(result=result$best, plots=plots)
 ## 5 Suggestions
 
 *lineage*: Considering the randomness from clustering and dimension reduction processes, an iteration process with at least **30 repeats(default)** is recommended to guarantee a more stable and reliable cell clustering/clone tracing result.
+
+## 6 Reference
+
+L. Lin *et al*., LINEAGE: Label-free identification of endogenous informative single-cell mitochondrial RNA mutation for lineage analysis. *Proc. Natl. Acad. Sci. U.S.A.* **119(5)**, e2119767119 (2022). *https://doi.org/10.1073/pnas.2119767119*
