@@ -376,7 +376,7 @@ main=function(d=d,centers=3,nmarker=16){
     if(ari[6]>=0.05){
         cs=order(apply(aris,1,max),decreasing=TRUE)[1:6]
     }else{
-        cs=order(apply(aris,1,max),decreasing=TRUE)[ari>0.05]
+        cs=cs[ari>0.05]
     }
 
     # Plot the clustering in selected subspaces
